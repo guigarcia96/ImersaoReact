@@ -41,7 +41,7 @@ const CadastroCategoria = () => {
   };
 
   useEffect(() => {
-    const url = 'http://localhost:3333/categorias';
+    const url = 'http://localhost:8080/categorias';
     fetch(url)
       .then(async (response) => {
         const resposta = await response.json();
