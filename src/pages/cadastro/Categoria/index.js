@@ -41,8 +41,10 @@ const CadastroCategoria = () => {
   };
 
   useEffect(() => {
-    const url = 'http://localhost:8080/categorias';
-    fetch(url)
+    const URL = window.location.hostname.includes('localhost')
+      ? 'http://localhost:8080/categorias'
+      : 'https://gmflix.herokuapp.com/categorias/';
+    fetch(URL)
       .then(async (response) => {
         const resposta = await response.json();
         setCategorias([
