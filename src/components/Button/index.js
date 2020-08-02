@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 const AllButton = styled.a`
 color: var(--white);
@@ -10,6 +10,7 @@ font-style: normal;
 font-weight: bold;
 font-size: 16px;
 outline: none;
+background-color: var(--black);
 border-radius: 5px;
 text-decoration: none;
 display: inline-block;
@@ -20,4 +21,4 @@ transition: opacity .3s;
 }
 `;
 
-export default AllButton
+export default AllButton;

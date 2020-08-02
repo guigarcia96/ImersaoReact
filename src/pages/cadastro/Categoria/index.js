@@ -3,42 +3,19 @@ import { Link } from 'react-router-dom';
 import Button from '../../../components/Button';
 import PageDefault from '../../../components/PageDefault';
 import FormField from '../../../components/FormField';
+import useForm from '../../../hooks/useForm';
 
 const CadastroCategoria = () => {
   const initialValues = {
-    nome: '',
+    titulo: '',
     descricao: '',
     cor: '#000',
   };
-
   const [categorias, setCategorias] = useState([]);
 
-  const [values, setValues] = useState(initialValues);
-
-  const setInputValues = (chave, valor) => {
-    setValues({
-      ...values,
-      [chave]: valor, // chave vai ser dinamico de acordo com o valor
-    });
-  };
-
-  const handleChange = (event) => {
-    const { target } = event;
-    setInputValues(
-      target.getAttribute('name'),
-      target.value,
-    );
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    setCategorias([
-      ...categorias,
-      values,
-    ]);
-
-    setValues(initialValues);
-  };
+  const {
+    handleChange, values, clearForm,
+  } = useForm(initialValues);
 
   useEffect(() => {
     const URL = window.location.hostname.includes('localhost')
@@ -57,13 +34,21 @@ const CadastroCategoria = () => {
     <PageDefault>
       <h1>Cadastro de Categoria</h1>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={function handleSubmit(event) {
+        event.preventDefault();
+        setCategorias([
+          ...categorias,
+          values,
+        ]);
+        clearForm();
+      }}
+      >
 
         <FormField
           label="Nome da Categoria"
-          value={values.nome}
+          value={values.titulo}
           onChange={handleChange}
-          name="nome"
+          name="titulo"
           type="text"
         />
 
@@ -83,7 +68,7 @@ const CadastroCategoria = () => {
           onChange={handleChange}
         />
 
-        <Button>
+        <Button as="button" type="submit">
           Cadastrar
         </Button>
 
@@ -102,7 +87,7 @@ const CadastroCategoria = () => {
             return (
 
               <li key={indexValue}>
-                {categoria.nome}
+                {categoria.titulo}
               </li>
             );
           })
