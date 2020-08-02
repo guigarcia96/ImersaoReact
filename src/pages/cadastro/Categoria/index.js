@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import Button from '../../../components/Button';
 import PageDefault from '../../../components/PageDefault';
 import FormField from '../../../components/FormField';
 import useForm from '../../../hooks/useForm';
+import categoriesRepository from '../../../repositories/categories';
 
 const CadastroCategoria = () => {
   const initialValues = {
@@ -12,7 +13,7 @@ const CadastroCategoria = () => {
     cor: '#000',
   };
   const [categorias, setCategorias] = useState([]);
-
+  const history = useHistory();
   const {
     handleChange, values, clearForm,
   } = useForm(initialValues);
@@ -30,19 +31,40 @@ const CadastroCategoria = () => {
       });
   }, []);
 
+  function handleSubmit(event) {
+    event.preventDefault();
+    const categoriaUpperCase = categorias.map((categoria) => {
+      let categoriaUpper = categoria.titulo.toUpperCase();
+      categoriaUpper = categoriaUpper.replace(/\s/g, '');
+      return categoriaUpper;
+    });
+
+    let valueUpper = values.titulo.toUpperCase();
+    valueUpper = valueUpper.replace(/\s/g, '');
+
+    if (categoriaUpperCase.includes(valueUpper)) {
+      alert('Categoria já existente');
+      clearForm();
+    } else {
+      setCategorias([
+        ...categorias,
+        values,
+      ]);
+      categoriesRepository.create({
+        titulo: values.titulo,
+        cor: values.cor,
+
+      });
+      clearForm();
+      history.push('/cadastro/video');
+    }
+  }
+
   return (
     <PageDefault>
       <h1>Cadastro de Categoria</h1>
 
-      <form onSubmit={function handleSubmit(event) {
-        event.preventDefault();
-        setCategorias([
-          ...categorias,
-          values,
-        ]);
-        clearForm();
-      }}
-      >
+      <form onSubmit={handleSubmit}>
 
         <FormField
           label="Nome da Categoria"
@@ -72,6 +94,10 @@ const CadastroCategoria = () => {
           Cadastrar
         </Button>
 
+        <Button as={Link} to="/">
+          Ir para Home
+        </Button>
+
       </form>
 
       {categorias.length === 0 && (
@@ -80,7 +106,7 @@ const CadastroCategoria = () => {
         </div>
 
       )}
-      <ul>
+      {/* <ul>
         {
           categorias.map((categoria, index) => {
             const indexValue = `${categoria}-${index}`;
@@ -92,11 +118,8 @@ const CadastroCategoria = () => {
             );
           })
         }
-      </ul>
+      </ul> */}
 
-      <Link to="/">
-        Ir para Home
-      </Link>
     </PageDefault>
   );
 };

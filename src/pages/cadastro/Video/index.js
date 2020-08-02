@@ -28,18 +28,23 @@ function CadastroVideo() {
 
     const categoriaEscolhida = categorias.find((categoria) => categoria.titulo === values.categoria);
 
-    videosRepository.create({
-      titulo: values.titulo,
-      url: values.url,
-      categoriaId: categoriaEscolhida.id,
-    })
-      .then(() => {
-        clearForm(values);
-        history.push('/');
+    if (!categoriaEscolhida) {
+      alert('Categoria não cadastrada. Favor cadastra-lá ou escolher uma categoria diferente');
+      clearForm();
+    } else {
+      videosRepository.create({
+        titulo: values.titulo,
+        url: values.url,
+        categoriaId: categoriaEscolhida.id,
       })
-      .catch((error) => {
-        console.log(error);
-      });
+        .then(() => {
+          clearForm(values);
+          history.push('/');
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   }
 
   return (
@@ -72,14 +77,15 @@ function CadastroVideo() {
         />
 
         <Button as="button" type="submit">
-          Cadastrar
+          Cadastrar Vídeo
+        </Button>
+
+        <Button as={Link} to="/cadastro/categoria">
+          Cadastrar Categoria
         </Button>
 
       </form>
 
-      <Link to="/cadastro/categoria">
-        Cadastrar Categoria
-      </Link>
     </PageDefault>
   );
 }

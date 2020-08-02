@@ -1,11 +1,12 @@
 import React from 'react';
 import { FooterBase } from './styles';
+import logo from '../../assets/logo_main.png';
 
 function Footer() {
   return (
     <FooterBase>
-      <a href="https://www.alura.com.br/">
-        <img src="https://www.alura.com.br/assets/img/alura-logo-white.1570550707.svg" alt="Logo Alura" />
+      <a href="https://www.gmflix.vercel.app/">
+        <img src={logo} width={150} height={75} alt="Logo GMFlix" />
       </a>
       <p>
         Orgulhosamente criado durante a

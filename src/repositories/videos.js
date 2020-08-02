@@ -15,6 +15,7 @@ function create(objetoDoVideo) {
         const resposta = await respostaDoServidor.json();
         return resposta;
       }
+      
 
       throw new Error('Não foi possível cadastrar os dados :(');
     });

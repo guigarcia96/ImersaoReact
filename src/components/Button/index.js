@@ -15,6 +15,8 @@ border-radius: 5px;
 text-decoration: none;
 display: inline-block;
 transition: opacity .3s;
+margin-right: 10px;
+margin-bottom: 20px;
 &:hover,
 &:focus {
   opacity: .5;
