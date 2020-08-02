@@ -187,23 +187,6 @@
       "titulo": "Resident Evil 8",
       "url": "https://www.youtube.com/watch?v=JSapXD9vxYA"
     },
-    {
-      "titulo": "Título Padrão",
-      "url": "https://www.youtube.com/watch?v=xbo9GVmv87Y",
-      "categoriaId": 1,
-      "id": 25
-    },
-    {
-      "titulo": "Título Padrão",
-      "url": "https://www.youtube.com/watch?v=wFMJ-gd4x6o",
-      "categoriaId": 1,
-      "id": 26
-    },
-    {
-      "titulo": "Título Padrão",
-      "url": "https://www.youtube.com/watch?v=xbo9GVmv87Y",
-      "categoriaId": 1,
-      "id": 27
-    }
+   
   ]
 }

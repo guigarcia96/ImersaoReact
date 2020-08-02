@@ -14,6 +14,19 @@ function getCategoriesWithVideos() {
   });
 }
 
+function getAllCategories() {
+  return fetch(`${CATEGORIES_URL}`).then(async (response) => {
+    if (response.ok) {
+      const resposta = await response.json();
+
+      return resposta;
+    }
+
+    throw new Error('Não foi possível pegar os dados');
+  });
+}
+
 export default {
   getCategoriesWithVideos,
+  getAllCategories,
 };
